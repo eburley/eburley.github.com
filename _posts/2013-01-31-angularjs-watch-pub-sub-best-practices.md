@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: angularjs.org watch, on pub sub, and you.
 excerpt: A team I work on has been using angularjs.org for more than half a year now, and I wanted to put out some best practices...
 ---

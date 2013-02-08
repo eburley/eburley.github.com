@@ -1,46 +1,7 @@
-<!DOCTYPE html>
-<html>
-
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="eburley.github.com : code and stuff" />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="http://eburley.github.com/stylesheets/stylesheet.css">
-
-    <title>{{page.title}}</title>
-  </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/eburley">View on GitHub</a>
-
-          <h1 id="project_title">eburley.github.com</h1>
-          <h2 id="project_tagline">code and stuff</h2>
-
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <h2>{{page.title}}</h2>
-      <section id="main_content" class="inner">
-      {{content}}
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">        
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-        <p><a href="http://eburley.com">eburley.com</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
-</html>
+---
+layout: default
+---
+<h2>{{ page.title }}</h2>
+{{content}}
+<br />
+<p>end of post</p>
