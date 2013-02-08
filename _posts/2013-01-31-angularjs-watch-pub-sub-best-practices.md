@@ -1,7 +1,7 @@
 ---
 layout: post
-title: angularjs.org $watch $on pub sub and you
-excerpt: A team I work on has been using Angular's various watch and event systems for more than half a year now, and I wanted to put out some best practices that we've learned from painful experience.  Warning: contains opinions.
+title: angularjs.org watch, on pub sub, and you.
+excerpt: A team I work on has been using angularjs.org for more than half a year now, and I wanted to put out some best practices...
 ---
 A team I work on has been using [angularjs.org's](http://angularjs.org) various watch and event systems for more than half a year now, and I wanted to put out some best practices that we've learned from painful experience.
 
