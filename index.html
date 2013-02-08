@@ -9,16 +9,17 @@ title: code and stuff
     </a>
     <p>
 
-    {% if post.excerpt %}
-    {{ post.excerpt }}
-    <br />
-    <a href="{{ post.url }}">      
-        read more...
-    </a>
-    {% else %}
-    {{ post.content }}
-    {% endif %}
+        {% if post.excerpt %}
+            {{ post.excerpt }}
+            <br />
+            <a href="{{ post.url }}">      
+                read more...
+            </a>
+        {% else %}
+            {{ post.content }}
+        {% endif %}
 
-    </p>    
+    </p>
+    
   </li>
 {% endfor %}
