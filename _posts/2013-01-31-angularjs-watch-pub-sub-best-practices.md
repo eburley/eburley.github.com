@@ -22,16 +22,16 @@ watch functions, not properties.  You can't set breakpoints on properties
 
 * if your watcher function looks like this:
 
-``` javascript
+{% highlight javascript %}
 $scope.$watch(function(){return SomeService.stateValueGetter()},
     function(newValue,oldValue){});
-```
+{% endhighlight %}
 
 just do this:
-``` javascript
+{% highlight javascript %}
 $scope.$watch(SomeService.stateValueGetter,
     function(newValue,oldValue){});
-```
+{% endhighlight %}
 
 ### When to use pub/sub:
 
@@ -46,7 +46,7 @@ $scope.$watch(SomeService.stateValueGetter,
 
 * encapsulate subject-specific watches using the following pattern:
 
-``` javascript 
+{% highlight javascript %}
 // an example channel service that lets consumers
 // subscribe and publish for nuclear reactor meltdowns
  
@@ -102,6 +102,6 @@ var MyController = function($scope, CoreReactorChannel){
     // Note: The handler can be an inline function
     CoreReactorChannel.onElevatedCoreTemperature($scope, onCoreTemperatureChange);
 };   
-```
+{% endhighlight %}
 
 * don't mix concerns in the channel code.  A general channel is a ball of mud.
