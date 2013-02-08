@@ -18,6 +18,7 @@ title: code and stuff
         {% else %}
             {{ post.content }}
         {% endif %}
+        <span>({{ post.date | date:"%Y-%m-%d" }})</span>
 
     </p>
     
