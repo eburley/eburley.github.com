@@ -5,7 +5,20 @@ title: code and stuff
 {% for post in site.posts %}
   <li>
     <a href="{{ post.url }}">      
-      <h3>{{ post.title }}</h3>
+      <h3>{{ post.title }}</h3>      
     </a>
+    <p>
+
+    {% if post.excerpt %}
+    {{ post.excerpt }}
+    <br />
+    <a href="{{ post.url }}">      
+        read more...
+    </a>
+    {% else %}
+    {{ post.content }}
+    {% endif %}
+
+    </p>    
   </li>
 {% endfor %}

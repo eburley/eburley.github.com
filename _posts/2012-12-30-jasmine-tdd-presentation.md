@@ -1,6 +1,6 @@
 ---
 layout: post
-title: I did a presentation
+title: I did a presentation on Jasmine and TDD
 ---
 # I did a presentation: 
 * the [slides](http://vimeo.com/57296465)
