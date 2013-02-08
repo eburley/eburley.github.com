@@ -1,60 +1,155 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>eburley.github.com by eburley</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="eburley.github.com : code and stuff" />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>eburley.github.com</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>eburley.github.com</h1>
-        <p>code and stuff</p>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/eburley">View on GitHub</a>
+
+          <h1 id="project_title">eburley.github.com</h1>
+          <h2 id="project_tagline">code and stuff</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a href="http://angularjs.org">angularjs.org</a>, $watch, $event, $on, $emit - what to use when</h1>
+
+<p>A team I work on has been using Angular's various watch and event systems for more than half a year now, and I wanted to put out some best practices that we've learned from painful experience.</p>
+
+<h3>When to use a watch:</h3>
+
+<ul>
+<li>when you're writing a directive and want data binding behavior</li>
+<li>when you're watching a stateful service </li>
+<li>when it's OK for the ui and state update to happen in a non-deterministic order</li>
+</ul><h3>When NOT to use a watch:</h3>
+
+<ul>
+<li>when you need to orchestrate complicated data loading patterns</li>
+<li>when you're watching the routeParams.</li>
+</ul><h2>Best practices around watches:</h2>
+
+<ul>
+<li><p>check for newValue !== oldValue in the watch callback.  Watch callbacks are always called at least once.
+watch functions, not properties.  You can't set breakpoints on properties</p></li>
+<li><p>if your watcher function looks like this:</p></li>
+</ul><div class="highlight"><pre><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span><span class="k">return</span> <span class="nx">SomeService</span><span class="p">.</span><span class="nx">stateValueGetter</span><span class="p">()},</span>
+    <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span><span class="nx">oldValue</span><span class="p">){});</span>
+</pre></div>
+
+<p>just do this:</p>
+
+<div class="highlight"><pre><span class="nx">$scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="nx">SomeService</span><span class="p">.</span><span class="nx">stateValueGetter</span><span class="p">,</span>
+    <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span><span class="nx">oldValue</span><span class="p">){});</span>
+</pre></div>
+
+<h3>When to use pub/sub:</h3>
+
+<ul>
+<li>when you need to let multiple subscribers know about an event and those subscribers need to do more than radiate information to their view.</li>
+</ul><h3>When NOT to use pub/sub:</h3>
+
+<ul>
+<li>when you're watching a simple state based service and using that to update a view.</li>
+<li>when you're writing a general purpose directive and need data binding.</li>
+</ul><h2>Best practices around pub/sub:</h2>
+
+<ul>
+<li>encapsulate subject-specific watches using the following pattern:</li>
+</ul><div class="highlight"><pre><span class="c1">// an example channel service that lets consumers</span>
+<span class="c1">// subscribe and publish for nuclear reactor meltdowns</span>
+
+<span class="kd">var</span> <span class="nx">CoreReactorChannel</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$rootScope</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// local constants for the message ids.  </span>
+    <span class="c1">// these are private implementation detail</span>
+    <span class="kd">var</span> <span class="nx">ELEVATED_CORE_TEMPERATURE_MESSAGE</span> <span class="o">=</span> <span class="s2">"elevatedCoreMessage"</span><span class="p">;</span>
+
+    <span class="c1">// publish elevatedCoreTemperature</span>
+    <span class="c1">// note that the parameters are particular to the problem domain</span>
+    <span class="kd">var</span> <span class="nx">elevatedCoreTemperature</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">core_id</span><span class="p">,</span> <span class="nx">temperature</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$rootScope</span><span class="p">.</span><span class="nx">$broadcast</span><span class="p">(</span><span class="nx">ELEVATED_CORE_TEMPERATURE_MESSAGE</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="nx">core_id</span><span class="o">:</span> <span class="nx">core_id</span><span class="p">,</span>
+                <span class="nx">temperature</span><span class="o">:</span> <span class="nx">temperature</span>
+            <span class="p">});</span>
+    <span class="p">};</span>
+
+    <span class="c1">// subscribe to elevatedCoreTemperature event.</span>
+    <span class="c1">// note that you should require $scope first </span>
+    <span class="c1">// so that when the subscriber is destroyed you </span>
+    <span class="c1">// don't create a closure over it, and te scope can clean up. </span>
+    <span class="kd">var</span> <span class="nx">onElevatedCoreTemperature</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">handler</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$scope</span><span class="p">.</span><span class="nx">$on</span><span class="p">(</span><span class="nx">ELEVATED_CORE_TEMPERATURE_MESSAGE</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">message</span><span class="p">){</span>
+            <span class="c1">// note that the handler is passed the problem domain parameters </span>
+            <span class="nx">handler</span><span class="p">(</span><span class="nx">core_id</span><span class="p">,</span> <span class="nx">temperature</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">};</span>
+
+    <span class="c1">// other CoreReactorChannel events would go here.</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="nx">elevatedCoreTemperature</span><span class="o">:</span> <span class="nx">elevatedCoreTemperature</span><span class="p">,</span>
+        <span class="nx">onElevatedCoreTemperature</span><span class="o">:</span> <span class="nx">onElevatedCoreTemperature</span>
+    <span class="p">};</span>
+<span class="p">};</span>
 
 
-        <p class="view"><a href="https://github.com/eburley">View My GitHub Profile</a></p>
+<span class="c1">//Usage elsewhere in the application</span>
+<span class="kd">var</span> <span class="nx">MyController</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">CoreReactorChannel</span><span class="p">){</span>
+    <span class="c1">// Handle core temperature changes</span>
+    <span class="kd">var</span> <span class="nx">onCoreTemperatureChange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">message</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">core_id</span><span class="p">,</span> <span class="nx">message</span><span class="p">.</span><span class="nx">temperature</span><span class="p">);</span>
+    <span class="p">}</span>
 
-      </header>
-      <section>
-        <h3>Welcome to GitHub Pages.</h3>
+    <span class="c1">// Let the CoreReactorChannel know the temperature has changed</span>
+    <span class="nx">$scope</span><span class="p">.</span><span class="nx">changeTemperature</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">core_id</span><span class="p">,</span> <span class="nx">temperature</span><span class="p">){</span>
+        <span class="nx">CoreReactorChannel</span><span class="p">.</span><span class="nx">elevatedCoreTemperature</span><span class="p">(</span><span class="nx">core_id</span><span class="p">,</span> <span class="nx">temperature</span><span class="p">);</span>
+    <span class="p">}</span>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+    <span class="c1">// Listen for temperature changes and call a handler</span>
+    <span class="c1">// Note: The handler can be an inline function</span>
+    <span class="nx">CoreReactorChannel</span><span class="p">.</span><span class="nx">onElevatedCoreTemperature</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">onCoreTemperatureChange</span><span class="p">);</span>
+<span class="p">};</span>   
+</pre></div>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<ul>
+<li>don't mix concerns in the channel code.  A general channel is a ball of mud.</li>
+</ul><hr><h1>I did a presentation:</h1>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<ul>
+<li>the <a href="http://vimeo.com/57296465">slides</a>
+</li>
+<li>the <a href="https://github.com/eburley/jasmine.presentation">code</a>
+</li>
+</ul>
       </section>
-      <footer>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+
     
+
   </body>
 </html>
