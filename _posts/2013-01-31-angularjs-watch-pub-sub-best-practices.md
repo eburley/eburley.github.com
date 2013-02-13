@@ -72,7 +72,7 @@ var CoreReactorChannel = function($rootScope) {
     var onElevatedCoreTemperature = function($scope, handler) {
         $scope.$on(ELEVATED_CORE_TEMPERATURE_MESSAGE, function(event, message){
             // note that the handler is passed the problem domain parameters 
-            handler(core_id, temperature);
+            handler(message.core_id, message.temperature);
         });
     };
 
@@ -103,4 +103,12 @@ var MyController = function($scope, CoreReactorChannel){
 };   
 {% endhighlight %}
 
+* there's also a [fiddle](http://jsfiddle.net/eburley/N2yUF) showing this in use.
+
 * don't mix concerns in the channel code.  A general channel is a ball of mud.
+
+---
+* another note: This is a pattern that works well for this team.  If you do opt to 
+use another pub/sub mechanism (and there are many many out there), don't forget to use
+$watch('destryoy',function(){ /* unsubscribe here */}) to avoid creating closures over
+your controllers and/or services.
