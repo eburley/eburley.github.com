@@ -4,7 +4,7 @@ title: How a free phone stole hours of my life
 excerpt: Finding a carrier for an unlocked phone is a mess
 ---
 
-### How a free phone cost me hours of my life
+## How a free phone cost me hours of my life
 A while back I participated in a hackathon of sorts around writing windows 8 apps using
 javascript.  It was actually straightforward, and you can read more about it
 [here](http://www.jstastetest.com/).  I cranked out 3 apps, and received a nice
@@ -16,7 +16,7 @@ She had been using Kajeet, which provides good draconian parental control, but
 her phone is an ancient refurb android set from back in the day, with zero battery 
 life.  
 
-## What a mess
+### What a mess
 tl;dr: Bring your own phone / contract free is a great idea, but is entirely unfriendly
 to humans.  Data, texting, international, and calling are all wildly inconsistent in 
 pricing.
