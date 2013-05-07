@@ -3,8 +3,6 @@ layout: post
 title: How a free phone stole hours of my life
 excerpt: Finding a carrier for an unlocked phone is a mess
 ---
-
-## How a free phone cost me hours of my life
 A while back I participated in a hackathon of sorts around writing windows 8 apps using
 javascript.  It was actually straightforward, and you can read more about it
 [here](http://www.jstastetest.com/).  I cranked out 3 apps, and received a nice
