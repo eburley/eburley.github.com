@@ -110,5 +110,5 @@ var MyController = function($scope, CoreReactorChannel){
 ---
 * another note: This is a pattern that works well for this team.  If you do opt to 
 use another pub/sub mechanism (and there are many many out there), don't forget to use
-$watch('destryoy',function(){ /* unsubscribe here */}) to avoid creating closures over
+$watch('destryoy',function(){ /\* unsubscribe here \*/ }) to avoid creating closures over
 your controllers and/or services.
