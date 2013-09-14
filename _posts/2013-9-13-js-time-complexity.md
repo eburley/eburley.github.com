@@ -21,8 +21,8 @@ Using the excellent [jsperf.com](http://jsperf.com) I tested with 1000, 5000, an
 Other takeaways are that push and pop are definitely the way to go instead of using 
 
 {% highlight javascript %}
-array_var\[array_var.length\];
-delete array_var\[array_var.length-1\];
+array_var[array_var.length];
+delete array_var[array_var.length-1];
 {% endhighlight %}
 
 Also, it really behooves you to use an Array when you mean it (using objects instead of arrays is about 99 times [slower](http://jsperf.com/object-literal-treated-as-array) on append)
