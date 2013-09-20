@@ -1,10 +1,10 @@
 ---
 layout: post
 title: Studs, Rockstars, and other names for things we do
-excerpt: Are you a hiring manager getting resumes d-bag rockstars ? Do something about it.
+excerpt: Are you a hiring manager getting resumes from d-bag rockstars ? Do something about it.
 ---
 
-summary: If you're using external recruiters, double check that their listings represent everything you want from candidates, and nothing you don't.
+tl;dr: If you're using external recruiters, double check that their listings represent everything you want from candidates, and nothing you don't.
 
 At my employer we use both external and internal recruiters.  Our internal recruiting is really busy on a lot of fronts, and we've got numerous locations.We use outside recruiters to supplement our internal efforts, and sometimes recruiters with local presence can be a big help.  Sometimes.
 
@@ -17,6 +17,6 @@ What?  Are you kidding me?  Just so we're clear -- I'm objecting to the term 'st
 I would have also objected to the term 'rockstar'.  If you're a 'rockstar'  I'll have heard of you, or you'll show up in a [Google](https://www.google.com/?q=Guido%20Van%20Rossum#q=Guido+Van+Rossum) search, and you won't need to call yourself a 'rockstar'.  If you think of yourself as a rockstar and expect treatment, hours, and 
 [room service](http://theweek.com/article/index/224260/celebrity-tour-riders-the-9-most-ridiculous-demands) to match, I'd rather not interview you.
 
-In summary:: If you're part of a hiring team, you owe it to yourself to read your job listings and those of the recruiters that represent you.  Make sure that your culture and the messages they're sending about your culture actually match.
+In summary: If you're part of a hiring team, you owe it to yourself to read your job listings and those of the recruiters that represent you.  Make sure that the messages your jop postings are sending about your culture actually match your culture.  
 
 (note -- as with everything on this little site, my opinions are my own, and may not reflect those of my employer)
