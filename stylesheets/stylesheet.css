@@ -57,9 +57,9 @@ Theme Styles
 
 body {
   box-sizing: border-box;
-  color:#302c29;
-  background:#466964;
-  font-size: 14px;
+  color:#333;
+  background:#FFF;
+  font-size: 17px;
   font-family:'Quattrocento Sans',Arial,sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -68,7 +68,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   margin: 10px 0;
   font-weight: 700;
-  color:#302c29;
+  color:#333;
   font-family:'Quattrocento Sans',Arial,sans-serif;
   letter-spacing: -1px;
 }
@@ -104,14 +104,9 @@ p {
   margin: 10px 0 15px 0;
 }
 
-footer p {
-color:#a7c4bb;
-
-}
-
-a {
-  text-decoration: none;
-  color:#273b38;
+a, a > h3 {
+  #text-decoration: none;
+  color:#333;
   text-shadow: none;
 
   transition: color 0.5s ease;
@@ -126,14 +121,9 @@ a {
   -ms-transition: text-shadow 0.5s ease;
 }
 
-#main_content a:hover {
-  color:#273b38;
-  text-shadow: #009090 0px 0px 2px;
-}
-
+#main_content a:hover,
 footer a:hover {
-
-  text-shadow: #009090 0px 0px 2px;
+  text-shadow: #333 0px 0px 1px;
 }
 
 em {
@@ -162,7 +152,7 @@ img {
 pre, code {
   width: 100%;
   color: #222;
-  background-color: #fff;
+  background-color: #CCC;
 
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
   font-size: 14px;
@@ -290,7 +280,7 @@ Full-Width Styles
 #project_title {
   margin: 0;
   font-size: 24px;
-color:#a7c4bb;
+color:#333;
 
 
 }
@@ -299,7 +289,7 @@ color:#a7c4bb;
   font-size: 20px;
   font-weight: 300;
   background: none;
-color:#a7c4bb;
+color:#555;
 
 
 }
@@ -314,35 +304,6 @@ color:#a7c4bb;
   background: url('../images/icon_download.png') no-repeat 0% 90%;
 }
 
-.zip_download_link {
-  display: block;
-  float: right;
-  width: 90px;
-  height:70px;
-  text-indent: -5000px;
-  overflow: hidden;
-  background: url(../images/sprite_download.png) no-repeat bottom left;
-}
-
-.tar_download_link {
-  display: block;
-  float: right;
-  width: 90px;
-  height:70px;
-  text-indent: -5000px;
-  overflow: hidden;
-  background: url(../images/sprite_download.png) no-repeat bottom right;
-  margin-left: 10px;
-}
-
-.zip_download_link:hover {
-  background: url(../images/sprite_download.png) no-repeat top left;
-}
-
-.tar_download_link:hover {
-  background: url(../images/sprite_download.png) no-repeat top right;
-}
-
 #main_content_wrap {
 
 
@@ -350,11 +311,11 @@ color:#a7c4bb;
 
 #main_content {
   padding-top: 10px;
-    background-color:#a7c4bb;
+    background-color:#FFF;
 }
 
-#footer_wrap {
-  background:#466964;
+#footer_wrap, footer {
+  background: #FFF;
 
 }
 
