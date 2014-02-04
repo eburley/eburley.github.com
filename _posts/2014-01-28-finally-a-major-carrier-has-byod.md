@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Finally a carrier has a real BYOD plan.
-excerpt: As mentioned in a p
+excerpt: Finding a good BYOD plan used to be a pain.
 ---
 As mentioned in a previous [article](/2013/05/05/free-phone-timesuck.html), finding an MVNO
 that understands BYOD was a pain in the backend.  Finally T-Mobile brought a plan that made sense.
