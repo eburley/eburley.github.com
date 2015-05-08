@@ -88,8 +88,8 @@ var CoreReactorChannel = function($rootScope) {
 //Usage elsewhere in the application
 var MyController = function($scope, CoreReactorChannel){
     // Handle core temperature changes
-    var onCoreTemperatureChange = function(message){
-    console.log(message.core_id, message.temperature);
+    var onCoreTemperatureChange = function(core_id, temperature){
+    console.log(core_id, temperature);
     }
     
     // Let the CoreReactorChannel know the temperature has changed
